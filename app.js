@@ -43,7 +43,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 
 const sessionOption = {
-  secret: "mysupersecretcode",
+  // secret: "mysupersecretcode",
+  secret: process.env.SECRET || "mysupersecretcode",
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -94,6 +95,11 @@ app.use((err, req, res, next) => {
 });
 
 //SERVER
-app.listen(8080, () => {
-  console.log("Server is listening to port 8080");
+// app.listen(8080, () => {
+//   console.log("Server is listening to port 8080");
+// });
+
+const PORT = process.env.PORT || 8080;
+app.listen(PORT, () => {
+  console.log(`Server is listening to port ${PORT}`);
 });
